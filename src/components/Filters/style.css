@@ -1,0 +1,73 @@
+@media screen and (max-width: 600px) {
+  .section-filter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    background-color: white;
+    z-index: var(--z-index-3);
+    border: 1px solid rgb(218, 218, 218);
+    margin-bottom: 0;
+  }
+
+  .section-filter > section {
+    padding: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+  }
+
+  .sort {
+    padding: 1rem;
+    position: absolute;
+    top: 7rem;
+    border-top: 1px solid rgb(218, 218, 218);
+    z-index: var(--z-index-2);
+    background-color: white;
+    width: 100%;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  }
+
+  .sort-items {
+    padding: 0.4rem;
+  }
+
+  .sort-items span {
+    padding: 0.2rem;
+  }
+
+  .filter {
+    padding: 1rem;
+    position: absolute;
+    top: 7rem;
+    border-top: 1px solid rgb(218, 218, 218);
+    z-index: var(--z-index-2);
+    background-color: white;
+    width: 100%;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+  }
+
+  .filter-heading {
+    margin: 0.4rem auto 0.4rem auto;
+    padding: 0.4rem;
+    color: var(--gray-600);
+    border-bottom: 1px solid var(--gray-50);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    margin: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    color: var(--gray-800);
+    background-color: var(--gray-50);
+    border-radius: 2.2rem;
+  }
+
+  .chip.chip-selected {
+    border: 1px solid var(--gray-800);
+    background-color: var(--primary-color);
+  }
+}

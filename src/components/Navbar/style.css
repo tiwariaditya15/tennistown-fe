@@ -1,0 +1,38 @@
+.navbar {
+  border: none;
+  display: flex;
+}
+.navbar > .main {
+  display: flex;
+  align-items: center;
+}
+.nav-profile {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  .navbar {
+    padding: unset;
+  }
+  .nav-brandlogo {
+    font-size: 1rem;
+  }
+  .nav-link {
+    padding: 1rem;
+  }
+  .badge-icon-notification {
+    top: -1.8rem;
+    left: 0.6rem;
+    background-color: var(--primary-color);
+    color: var(--gray-600);
+  }
+  .menu {
+    all: unset;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+}
