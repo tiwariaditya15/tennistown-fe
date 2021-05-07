@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Signup from "./components/Signup/Signup";
 import { products } from "./Data/Products";
+import PrivateRoutes from "./components/PrivateRoutes";
 import "./index.css";
 export default function App({}) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +22,10 @@ export default function App({}) {
       <Routes>
         <Route path="/" element={<Products />} />
         <Route path="products" element={<Products />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="wishlists" element={<WishLists />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <PrivateRoutes path="cart" element={<Cart />} />
+        <PrivateRoutes path="wishlists" element={<WishLists />} />
       </Routes>
     </div>
   );
