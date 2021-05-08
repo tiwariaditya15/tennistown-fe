@@ -32,7 +32,7 @@ export function MdiHeartOutline(props) {
 
 export function MdiCart(props) {
   return (
-    <svg width="1.5rem" height="rem" viewBox="0 0 24 24" {...props}>
+    <svg width="1.5rem" height="1.5rem" viewBox="0 0 24 24" {...props}>
       <path
         d="M17 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2M1 2v2h2l3.6 7.59l-1.36 2.45c-.15.28-.24.61-.24.96a2 2 0 0 0 2 2h12v-2H7.42a.25.25 0 0 1-.25-.25c0-.05.01-.09.03-.12L8.1 13h7.45c.75 0 1.41-.42 1.75-1.03l3.58-6.47c.07-.16.12-.33.12-.5a1 1 0 0 0-1-1H5.21l-.94-2M7 18c-1.11 0-2 .89-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z"
         fill="currentColor"
@@ -158,7 +158,7 @@ export function MdiMenu(props) {
 
 export function MdiHome(props) {
   return (
-    <svg width="1em" height="1em" viewBox="0 0 24 24" {...props}>
+    <svg width="1rem" height="1rem" viewBox="0 0 24 24" {...props}>
       <path
         d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8h5z"
         fill="currentColor"
@@ -172,6 +172,17 @@ export function MdiClose(props) {
     <svg width="2rem" height="2rem" viewBox="0 0 24 24" {...props}>
       <path
         d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"
+        fill="currentColor"
+      ></path>
+    </svg>
+  );
+}
+
+export function MdiAccount(props) {
+  return (
+    <svg width="1rem" height="1rem" viewBox="0 0 24 24" {...props}>
+      <path
+        d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"
         fill="currentColor"
       ></path>
     </svg>

@@ -10,6 +10,7 @@ import Signup from "./components/Signup/Signup";
 import { products } from "./Data/Products";
 import PrivateRoutes from "./components/PrivateRoutes";
 import "./index.css";
+
 export default function App({}) {
   const [isOpen, setIsOpen] = useState(false);
 

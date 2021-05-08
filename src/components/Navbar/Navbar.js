@@ -8,12 +8,15 @@ import {
   MdiMenu,
 } from "../icones";
 import { useStateContext } from "../../context/StateProvider";
+import { useAuthContext } from "../../context/AuthenticationProvider";
 import "./style.css";
 
 export default function Navbar({ setIsOpen }) {
   const location = useLocation();
   const { state } = useStateContext();
-
+  const {
+    authState: { logged },
+  } = useAuthContext();
   return (
     <>
       <section className="navbar">
@@ -53,9 +56,11 @@ export default function Navbar({ setIsOpen }) {
               )}
             </span>
           </NavLink>
-          <NavLink to="login" className="nav-link">
-            <MdiLogin />
-          </NavLink>
+          {!logged && (
+            <NavLink to="login" className="nav-link">
+              <MdiLogin />
+            </NavLink>
+          )}
         </section>
       </section>
     </>

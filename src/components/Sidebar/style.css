@@ -19,12 +19,20 @@
     left: 0%;
     transition: 450ms ease-out;
   }
-
-  .routes {
-    padding: 0.5rem;
+  .sidebar a {
+    color: var(--gray-800);
+    text-decoration: none;
   }
-
+  .routes {
+    display: flex;
+    font-weight: 550;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--card-color);
+  }
+  .routes span {
+    padding: 0.4rem;
+  }
   .menu-side {
-    background-color: red;
+    width: 100%;
   }
 }
