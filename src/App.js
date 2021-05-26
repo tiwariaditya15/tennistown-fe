@@ -7,26 +7,27 @@ import Products from "./components/Products/Products";
 import Login from "./components/Login/Login";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Signup from "./components/Signup/Signup";
-import { products } from "./Data/Products";
+import Home from "./components/Home/Home";
+import Accounts from "./components/Accounts/Accounts";
 import PrivateRoutes from "./components/PrivateRoutes";
 import "./index.css";
 
 export default function App({}) {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log({ products, isOpen });
   return (
     <div>
       <Navbar setIsOpen={setIsOpen} />
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
       <Routes>
-        <Route path="/" element={<Products />} />
+        <Route path="/" element={<Home />} />
         <Route path="products" element={<Products />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <PrivateRoutes path="cart" element={<Cart />} />
         <PrivateRoutes path="wishlists" element={<WishLists />} />
+        <PrivateRoutes path="accounts" element={<Accounts />} />
       </Routes>
     </div>
   );

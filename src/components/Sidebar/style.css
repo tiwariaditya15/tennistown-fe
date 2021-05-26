@@ -1,38 +1,38 @@
-@media screen and (max-width: 600px) {
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background-color: white;
-    transition: 450ms ease-in;
-    z-index: var(--z-index-1);
-    padding: 2rem;
-  }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: white;
+  transition: 450ms ease-in;
+  z-index: var(--z-index-1);
+  padding: 2rem;
+}
 
-  .sidebar.active {
-    left: 0%;
-    transition: 450ms ease-out;
-  }
-  .sidebar a {
-    color: var(--gray-800);
-    text-decoration: none;
-  }
-  .routes {
-    display: flex;
-    font-weight: 550;
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--card-color);
-  }
-  .routes span {
-    padding: 0.4rem;
-  }
-  .menu-side {
-    width: 100%;
-  }
+.sidebar.active {
+  left: 0%;
+  transition: 450ms ease-out;
+}
+.sidebar a {
+  color: var(--gray-800);
+  text-decoration: none;
+}
+.routes {
+  display: flex;
+  font-weight: 550;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--card-color);
+}
+.routes span {
+  padding: 0.4rem;
+}
+.menu-side {
+  width: 100%;
+}
+@media screen and (max-width: 600px) {
 }

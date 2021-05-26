@@ -7,6 +7,6 @@ export default function PrivateRoutes({ path, ...props }) {
   return authState.logged ? (
     <Route path={path} {...props} />
   ) : (
-    <Navigate replace state={{ from: path }} to="/login" />
+    <Navigate replace={true} state={{ from: path }} to="/login" />
   );
 }

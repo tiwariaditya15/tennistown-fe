@@ -1,4 +1,6 @@
 import { useStateContext } from "../../context/StateProvider";
+import { useAuthContext } from "../../context/AuthenticationProvider";
+import { updateProductQuantity } from "../../actions/cart";
 import {
   MdiCardsHeartRed,
   MdiHeartOutline,
@@ -9,9 +11,11 @@ import {
   IcBaselineRemove,
 } from "../icones/index";
 import "./style.css";
+
 export default function Cart({}) {
   const { state, dispatch } = useStateContext();
-  console.log(state.cart);
+  const { userId } = useAuthContext;
+  console.log(state.cart, userId);
   return (
     <>
       <section className="cart-details">
@@ -25,17 +29,17 @@ export default function Cart({}) {
         >
           <BxBxRupee />
           {state.cart.reduce(
-            (acc, cur) => acc + cur.price.discounted * cur.quantity,
+            (acc, cur) => acc + cur.productId.price.discounted * cur.quantity,
             0
           )}
         </span>
       </section>
       <div className="flex">
-        {state.cart.map((item) => {
+        {state.cart.map(({ quantity, productId: item }) => {
           return (
             <section class="card">
               <section className="card-header">
-                {state.wishlists.some((wish) => wish.id === item.id) ? (
+                {state.wishlists.some((wish) => wish._id === item._id) ? (
                   <span
                     onClick={() =>
                       dispatch({
@@ -115,12 +119,20 @@ export default function Cart({}) {
                   }}
                 >
                   <section
-                    onClick={() =>
-                      dispatch({
-                        type: "DECREASEQUANTITY",
-                        payload: { ...item },
-                      })
-                    }
+                    onClick={() => {
+                      console.log({
+                        userId,
+                        productId: item._id,
+                        quantity: quantity - 1,
+                      });
+                      updateProductQuantity(
+                        userId,
+                        item._id,
+                        quantity - 1,
+                        dispatch,
+                        "UPDATEQUANTITY"
+                      );
+                    }}
                   >
                     <IcBaselineRemove />
                   </section>
@@ -130,14 +142,16 @@ export default function Cart({}) {
                       padding: "0.5rem 1rem",
                     }}
                   >
-                    {item.quantity}
+                    {quantity}
                   </section>
                   <section
                     onClick={() =>
-                      dispatch({
-                        type: "INCREASEQUANTITY",
-                        payload: { ...item },
-                      })
+                      updateProductQuantity(
+                        userId,
+                        item._id,
+                        quantity + 1,
+                        "UPDATEQUANTITY"
+                      )
                     }
                   >
                     <IcBaselineAdd />

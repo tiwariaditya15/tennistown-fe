@@ -27,7 +27,7 @@ export default function Navbar({ setIsOpen }) {
           >
             <MdiMenu />
           </section>
-          <NavLink to="products" className="nav-link nav-brandlogo">
+          <NavLink to="/" className="nav-link nav-brandlogo">
             TennisTown
           </NavLink>
         </section>

@@ -3,7 +3,7 @@ export const stateReducer = (state, action) => {
     case "ADDTOCART":
       return {
         ...state,
-        cart: state.cart.some((item) => item.id === action.payload.id)
+        cart: state.cart.some((item) => item._id === action.payload._id)
           ? [...state.cart]
           : state.cart.concat({ ...action.payload, quantity: 1 }),
       };
@@ -11,7 +11,7 @@ export const stateReducer = (state, action) => {
       return {
         ...state,
         cart: state.cart.map((cartItem) => {
-          return cartItem.id === action.payload.id
+          return cartItem._id === action.payload._id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : { ...cartItem };
         }),
@@ -21,7 +21,7 @@ export const stateReducer = (state, action) => {
         ...state,
         cart: state.cart
           .map((cartItem) => {
-            return cartItem.id === action.payload.id
+            return cartItem._id === action.payload._id
               ? cartItem.quantity > 0
                 ? { ...cartItem, quantity: cartItem.quantity - 1 }
                 : { ...cartItem }
@@ -32,7 +32,9 @@ export const stateReducer = (state, action) => {
     case "ADDTOWISHLIST":
       return {
         ...state,
-        wishlists: state.wishlists.some((item) => item.id === action.payload.id)
+        wishlists: state.wishlists.some(
+          (item) => item._id === action.payload._id
+        )
           ? [...state.wishlists]
           : state.wishlists.concat(action.payload),
       };
@@ -40,13 +42,13 @@ export const stateReducer = (state, action) => {
       return {
         ...state,
         wishlists: state.wishlists.filter(
-          (item) => item.id !== action.payload.id
+          (item) => item._id !== action.payload._id
         ),
       };
     case "REMOVEFROMCART":
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload.id),
+        cart: state.cart.filter((item) => item._id !== action.payload._id),
       };
     case "CHANGESELECTEDBRAND":
       return {
@@ -83,6 +85,13 @@ export const stateReducer = (state, action) => {
           selectedLevel: "",
         },
       };
+
+    case "SETCART":
+      return {
+        ...state,
+        cart: action.payload.products,
+      };
+
     default:
       return state;
   }

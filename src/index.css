@@ -5,6 +5,7 @@
 }
 :root {
   --primary-color: #cf0;
+  --error-color: red;
   --card-color: rgb(218, 218, 218);
   --gray-500: #6b7280;
   --gray-800: #1f2937;
@@ -64,6 +65,45 @@
   position: sticky;
   top: 0rem;
   z-index: var(--z-index-2);
+}
+
+.loader {
+  max-width: 50%;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0.4rem solid var(--gray-50);
+  border-radius: 50%;
+  border-top: 0.4rem solid var(--primary-color);
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+.error {
+  color: var(--error-color);
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @media screen and (max-width: 600px) {
   .card {

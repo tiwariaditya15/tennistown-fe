@@ -92,6 +92,7 @@ export default function WishLists({}) {
           </section>
         );
       })}
+      {state.wishlists.length === 0 && <span>Nothing to show here</span>}
     </div>
   );
 }

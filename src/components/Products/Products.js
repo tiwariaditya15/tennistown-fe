@@ -1,6 +1,5 @@
 import { useStateContext } from "../../context/StateProvider";
 import Filters from "../Filters/Filters";
-import { products as data } from "../../Data/Products";
 import {
   MdiCardsHeartRed,
   MdiHeartOutline,
@@ -9,32 +8,44 @@ import {
   BxBxRupee,
 } from "../icones";
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getSortedData, getFilteredData } from "./utilityFuntions";
+import axios from "axios";
 
-export default function Products({}) {
+export default function Products() {
   const { state, dispatch } = useStateContext();
   const [message, setMessage] = useState(false);
+  const [data, setData] = useState([]);
 
   const handleAddToCart = () => {
     setMessage((msg) => !msg);
     setTimeout(() => setMessage((msg) => !msg), 3000);
   };
 
-  console.log({ data });
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/products")
+      .then((res) => {
+        if (res.data.products.length) {
+          setData(res.data.products);
+        }
+      })
+      .catch((error) => console.log({ error }));
+  }, []);
 
   const sortedData = getSortedData(state.sortBy, data);
   const filteredData = getFilteredData(state.filters, sortedData);
-  console.log({ filteredData });
+
   return (
     <>
       <Filters />
       <div className="products flex">
+        {!data.length && <section className="loader"></section>}
         {filteredData.map((item) => {
           return (
-            <section class="card" key={item.id}>
+            <section class="card" key={item._id}>
               <section className="card-header">
-                {state.wishlists.some((wish) => wish.id === item.id) ? (
+                {state.wishlists.some((wish) => wish._id === item._id) ? (
                   <span
                     onClick={() =>
                       dispatch({
@@ -119,12 +130,12 @@ export default function Products({}) {
             </section>
           );
         })}
-        {message && (
-          <section class="snackbar snackbar-success">
-            <span>Added to cart</span>
-          </section>
-        )}
       </div>
+      {message && (
+        <section class="snackbar snackbar-success">
+          <span>Added to cart</span>
+        </section>
+      )}
     </>
   );
 }

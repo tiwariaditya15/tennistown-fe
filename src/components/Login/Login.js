@@ -1,31 +1,27 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 import { useAuthContext } from "../../context/AuthenticationProvider";
 import "./style.css";
 
-export default function Login({}) {
-  const { authDispatch } = useAuthContext();
+export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
   const [loginCredentials, setLoginCredentials] = useState({
     username: "",
     password: "",
   });
 
+  const { loginWithUsernamePassword } = useAuthContext();
+
   const login = () => {
     if (loginCredentials.username.length && loginCredentials.password.length) {
-      axios
-        .post("http://localhost:5000/accounts/login", {
-          username: loginCredentials.username,
-          password: loginCredentials.password,
-        })
-        .then((res) => {
-          if (res.data.status === 200) {
-            authDispatch({ type: "LOGIN", payload: { success: true } });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      const status = loginWithUsernamePassword(
+        loginCredentials.username,
+        loginCredentials.password
+      );
+      // complete the logic if API call in loginWithUsernamePassword fails because of wrong creds
+    } else {
+      // setError if username/password is empty
     }
   };
 
@@ -53,6 +49,7 @@ export default function Login({}) {
         placeholder="Password"
         className="form-input outlined"
       />
+      {error && <p className="error"> {error} </p>}
       <input
         type="button"
         value="Log In"

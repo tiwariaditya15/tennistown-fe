@@ -5,6 +5,22 @@ export const authReducer = (state, action) => {
         logged: true,
       };
 
+    case "SIGNUP":
+      return {
+        logged: true,
+      };
+
+    case "LOGOUT":
+      return {
+        logged: false,
+      };
+
+    case "SETUSERID":
+      return {
+        ...state,
+        userId: action.payload.userId,
+      };
+
     default:
       return {
         ...state,

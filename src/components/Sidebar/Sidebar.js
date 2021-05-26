@@ -38,7 +38,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             <span>
               <MdiCart width="1rem" height="1rem" />
             </span>
-            <span>My Cart</span>
+            <span>Cart</span>
           </section>
         </NavLink>
         <NavLink to="wishlists">
@@ -46,7 +46,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             <span>
               <MdiCardsHeart width="1rem" height="1rem" />
             </span>
-            <span>My Wishlists</span>
+            <span>Wishlists</span>
           </section>
         </NavLink>
         <NavLink to="accounts">
@@ -54,7 +54,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
             <span>
               <MdiAccount />
             </span>
-            <span>My Account</span>
+            <span>Account</span>
           </section>
         </NavLink>
       </section>
