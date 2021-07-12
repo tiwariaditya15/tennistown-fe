@@ -3,7 +3,7 @@ import { IcRoundSort, MdiFilter } from "../icones/index";
 import { useState } from "react";
 import Sort from "./Sort";
 import Filter from "./Filter";
-export default function Filters({}) {
+export function Filters() {
   const [modal, setModal] = useState({ sort: false, filters: false });
   return (
     <>

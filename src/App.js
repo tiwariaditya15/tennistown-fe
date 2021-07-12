@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
-import Cart from "./components/Cart/Cart";
-import WishLists from "./components/WishLists/WishLists";
-import Products from "./components/Products/Products";
-import Login from "./components/Login/Login";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Signup from "./components/Signup/Signup";
-import Home from "./components/Home/Home";
-import Accounts from "./components/Accounts/Accounts";
+import { useInteractions } from "./context/InteractionProvider";
+import { Navbar } from "./components/Navbar/";
+import { Cart } from "./components/Cart/";
+import { WishLists } from "./components/WishLists/";
+import { Products } from "./components/Products/";
+import { Login } from "./components/Login/";
+import { Sidebar } from "./components/Sidebar";
+import { Signup } from "./components/Signup";
+import { Home } from "./components/Home/";
+import { Accounts } from "./components/Accounts/";
+import { IDLE } from "./constants/interactions";
+import { Snackbar } from "./components/Atoms/Snackbar";
 import PrivateRoutes from "./components/PrivateRoutes";
 import "./index.css";
 
-export default function App({}) {
+export default function App() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { status } = useInteractions();
   return (
     <div>
       <Navbar setIsOpen={setIsOpen} />
@@ -29,6 +32,7 @@ export default function App({}) {
         <PrivateRoutes path="wishlists" element={<WishLists />} />
         <PrivateRoutes path="accounts" element={<Accounts />} />
       </Routes>
+      {status !== IDLE && <Snackbar status={status} />}
     </div>
   );
 }

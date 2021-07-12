@@ -9,6 +9,7 @@
   --card-color: rgb(218, 218, 218);
   --gray-500: #6b7280;
   --gray-800: #1f2937;
+  --footer-color: #121212;
   --z-index-1: 1;
   --z-index-2: 2;
   --z-index-3: 3;
@@ -16,6 +17,7 @@
   --z-index-5: 5;
   --font-weight-550: 550;
 }
+
 .flex {
   display: flex;
   flex-wrap: wrap;
@@ -25,26 +27,36 @@
   flex-direction: column;
   flex-wrap: wrap;
 }
-
+.btn__link {
+  text-decoration: none;
+  color: white;
+}
 .card {
-  margin: 0.2rem auto 0.2rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0.2rem 0.1rem 0.2rem 0.1rem;
   border: 1px solid var(--card-color);
   max-width: 20%;
 }
 
+.card-title {
+  padding: 0.2rem 1.5rem;
+}
+
 .card-actions > section {
-  background-color: var(--gray-600);
   color: var(--gray-50);
+  background-color: var(--gray-600);
   padding: 0.5rem 1rem;
-  margin: 1rem;
+  margin: 0.6rem 1rem 0.5rem 1.5rem;
   border: 1px solid var(--gray-600);
   cursor: pointer;
-  border-radius: 0.1rem;
+  border-radius: 0.3rem;
+
   max-width: 100%;
 }
 
 .card-footer {
-  margin: 0;
+  margin-left: 1.5rem;
   font-size: 0.5rem;
   padding-top: 0.4rem;
   padding-bottom: 0.4rem;
@@ -60,13 +72,6 @@
   z-index: var(--z-index-2);
   width: 100%;
 }
-
-.navbar {
-  position: sticky;
-  top: 0rem;
-  z-index: var(--z-index-2);
-}
-
 .loader {
   max-width: 50%;
   margin-top: 2rem;
@@ -88,6 +93,14 @@
   margin-right: auto;
 }
 
+.snackbar {
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  z-index: var(--z-index-3);
+  transform: translateY(-50%);
+}
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
@@ -105,6 +118,7 @@
     transform: rotate(360deg);
   }
 }
+
 @media screen and (max-width: 600px) {
   .card {
     display: grid;
@@ -121,12 +135,11 @@
   .card-text {
     font-size: 0.8rem;
     margin: 0rem;
-    padding: 0 0 0.1rem 0;
+    padding: 0;
   }
   .card-actions > section {
     font-size: 1rem;
     margin: 0.5rem 0 0 0;
-    border-radius: 0.3rem;
   }
 
   .navbar {

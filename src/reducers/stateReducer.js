@@ -1,56 +1,49 @@
+import {
+  UPDATEQUANTITY,
+  SETCART,
+  ADDTOCART,
+  HIGHTOLOW,
+  LOWTOHIGH,
+  CLEARFILTERS,
+  CHANGESELECTEDBRAND,
+  CHANGESELECTEDLEVEL,
+} from "../constants/cart";
+import { SETWISHLISTS } from "../constants/wishslists";
+
 export const stateReducer = (state, action) => {
   switch (action.type) {
-    case "ADDTOCART":
+    case ADDTOCART:
       return {
         ...state,
-        cart: state.cart.some((item) => item._id === action.payload._id)
-          ? [...state.cart]
-          : state.cart.concat({ ...action.payload, quantity: 1 }),
-      };
-    case "INCREASEQUANTITY":
-      return {
-        ...state,
-        cart: state.cart.map((cartItem) => {
-          return cartItem._id === action.payload._id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : { ...cartItem };
-        }),
-      };
-    case "DECREASEQUANTITY":
-      return {
-        ...state,
-        cart: state.cart
-          .map((cartItem) => {
-            return cartItem._id === action.payload._id
-              ? cartItem.quantity > 0
-                ? { ...cartItem, quantity: cartItem.quantity - 1 }
-                : { ...cartItem }
-              : { ...cartItem };
-          })
-          .filter((cartItem) => cartItem.quantity !== 0),
-      };
-    case "ADDTOWISHLIST":
-      return {
-        ...state,
-        wishlists: state.wishlists.some(
-          (item) => item._id === action.payload._id
+        cart: state.cart.some(
+          (item) => item.product._id === action.payload.product._id
         )
-          ? [...state.wishlists]
-          : state.wishlists.concat(action.payload),
+          ? state.cart
+              .filter(
+                (product) => product.product._id !== action.payload.product._id
+              )
+              .concat({ ...action.payload })
+              .map(({ product, quantity }) => ({ product, quantity }))
+              .reverse()
+          : state.cart
+              .concat({
+                ...action.payload,
+              })
+              .map(({ product, quantity }) => ({ product, quantity }))
+              .reverse(),
       };
-    case "REMOVEFROMWISHLIST":
+
+    case SETWISHLISTS:
       return {
         ...state,
-        wishlists: state.wishlists.filter(
-          (item) => item._id !== action.payload._id
-        ),
+        wishlists: action.payload
+          ? action.payload.wishlists.map(({ product }) => ({
+              product,
+            }))
+          : [],
       };
-    case "REMOVEFROMCART":
-      return {
-        ...state,
-        cart: state.cart.filter((item) => item._id !== action.payload._id),
-      };
-    case "CHANGESELECTEDBRAND":
+
+    case CHANGESELECTEDBRAND:
       return {
         ...state,
         filters: {
@@ -58,7 +51,7 @@ export const stateReducer = (state, action) => {
           selectedBrand: action.payload.brand,
         },
       };
-    case "CHANGESELECTEDLEVEL":
+    case CHANGESELECTEDLEVEL:
       return {
         ...state,
         filters: {
@@ -67,17 +60,17 @@ export const stateReducer = (state, action) => {
         },
       };
 
-    case "LOWTOHIGH":
+    case LOWTOHIGH:
       return {
         ...state,
         sortBy: "LOWTOHIGH",
       };
-    case "HIGHTOLOW":
+    case HIGHTOLOW:
       return {
         ...state,
         sortBy: "HIGHTOLOW",
       };
-    case "CLEARFILTERS":
+    case CLEARFILTERS:
       return {
         ...state,
         filters: {
@@ -86,10 +79,30 @@ export const stateReducer = (state, action) => {
         },
       };
 
-    case "SETCART":
+    case SETCART:
       return {
         ...state,
-        cart: action.payload.products,
+        cart: action.payload
+          ? action.payload.products.map(({ product, quantity }) => ({
+              product,
+              quantity,
+            }))
+          : [],
+      };
+
+    case UPDATEQUANTITY:
+      return {
+        ...state,
+        cart: state.cart.map((cartItem) => {
+          return cartItem.product._id === action.payload.productId
+            ? {
+                product: { ...cartItem.product },
+                quantity: action.payload.quantity,
+              }
+            : {
+                ...cartItem,
+              };
+        }),
       };
 
     default:

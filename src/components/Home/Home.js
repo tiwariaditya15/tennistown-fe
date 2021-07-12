@@ -1,27 +1,16 @@
 import { NavLink } from "react-router-dom";
-import { images } from "../../images/index";
+import { images, brands } from "../../images/index";
+import { ImageSlider } from "../Atoms";
 import balls from "../../images/balls.jpg";
 import racquet from "../../images/racquet.jpg";
 import accessories from "../../images/accessories.jpg";
+import { MdiTwitter, MdiGithub } from "../icones/index";
 import "./style.css";
-import { useEffect, useState } from "react";
 
-export default function Home({}) {
-  const [imageIndex, setImageIndex] = useState(0);
-  useEffect(() => {
-    console.log("Mounted.");
-    const intervalId = setInterval(() => {
-      setImageIndex((prevIndex) => {
-        return prevIndex === images.length - 1 ? 0 : prevIndex + 1;
-      });
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, [imageIndex]);
+export function Home() {
   return (
     <section>
-      <section className="banner">
-        <img src={images[imageIndex]} alt="" />
-      </section>
+      <ImageSlider images={images} />
       <section className="categories">
         <NavLink to="products">
           <section className="category">
@@ -41,6 +30,24 @@ export default function Home({}) {
             <span className="img-text">ACCESSORIES</span>
           </section>
         </NavLink>
+      </section>
+      <section className="brands">
+        {brands.map((brand) => (
+          <section>
+            <img src={brand} alt="brands" className="brand" />
+          </section>
+        ))}
+      </section>
+      <section className="footer">
+        <section className="footer-brand">TennisTown&#169;2021</section>
+        <section className="footer-socials">
+          <span>
+            <MdiGithub width="1.5rem" height="1.5rem" />
+          </span>
+          <span>
+            <MdiTwitter width="1.5rem" height="1.5rem" />
+          </span>
+        </section>
       </section>
     </section>
   );

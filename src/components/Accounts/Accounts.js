@@ -1,4 +1,4 @@
-export default function Accounts({}) {
+export function Accounts() {
   return (
     <section className="card card-accounts">
       <section>yessirr</section>

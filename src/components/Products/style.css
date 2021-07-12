@@ -1,8 +1,9 @@
-.snackbar {
-  position: absolute;
-  top: 50%;
-  left: 55%;
-  z-index: var(--z-index-3);
-  padding: 0.5rem;
-  font-size: 2px;
+@media screen and (min-width: 700px) {
+  .products {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 100%;
+    margin-left: 12rem;
+    margin-right: auto;
+  }
 }

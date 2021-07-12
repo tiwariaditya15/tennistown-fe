@@ -7,7 +7,7 @@ import {
 } from "../icones/index";
 import { NavLink } from "react-router-dom";
 import "./style.css";
-export default function Sidebar({ isOpen, setIsOpen }) {
+export function Sidebar({ isOpen, setIsOpen }) {
   return (
     <section
       className={isOpen ? "sidebar active" : "sidebar"}

@@ -11,7 +11,7 @@ import { useStateContext } from "../../context/StateProvider";
 import { useAuthContext } from "../../context/AuthenticationProvider";
 import "./style.css";
 
-export default function Navbar({ setIsOpen }) {
+export function Navbar({ setIsOpen }) {
   const location = useLocation();
   const { state } = useStateContext();
   const {
@@ -28,7 +28,14 @@ export default function Navbar({ setIsOpen }) {
             <MdiMenu />
           </section>
           <NavLink to="/" className="nav-link nav-brandlogo">
-            TennisTown
+            <span
+              style={{
+                color: "var(--primary-color)",
+              }}
+            >
+              Tennis
+            </span>
+            Town
           </NavLink>
         </section>
         <section className="nav-profile">
@@ -51,7 +58,7 @@ export default function Navbar({ setIsOpen }) {
               {location.pathname === "/cart" ? <MdiCart /> : <MdiCartOutline />}
               {state.cart.length !== 0 && (
                 <span className="badge-icon-notification">
-                  {state.cart.length}
+                  {state.cart.filter(({ quantity }) => quantity).length}
                 </span>
               )}
             </span>

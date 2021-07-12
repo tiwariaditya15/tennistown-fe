@@ -2,6 +2,9 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 import { stateReducer } from "../reducers/stateReducer";
 import { useAuthContext } from "./AuthenticationProvider";
 import { getCart } from "../api/cart";
+import { getWishlists } from "../api/wishlists";
+import { SETCART } from "../constants/cart";
+import { SETWISHLISTS } from "../constants/wishslists";
 
 const StateContext = createContext();
 
@@ -17,27 +20,47 @@ export function StateProvider({ children }) {
   });
 
   const {
-    authState: { userId },
+    authState: { AUTH_TOKEN },
   } = useAuthContext();
 
   useEffect(() => {
-    console.log(userId);
     async function fetchCart() {
       try {
-        const res = await getCart(userId);
-        console.log(res.data);
+        const res = await getCart(AUTH_TOKEN);
+
         if (res.data.status === 200) {
           dispatch({
-            type: "SETCART",
-            payload: { products: res.data.cart.products },
+            type: SETCART,
+            payload: {
+              products: res.data.products,
+            },
           });
         }
       } catch (error) {
-        // dispatch action saying network error
+        // TODO: dispatch action saying network error
+        console.log({ error });
       }
     }
     fetchCart();
-  }, [userId]);
+  }, [AUTH_TOKEN]);
+
+  useEffect(() => {
+    async function fetchWishlists() {
+      try {
+        const { data } = await getWishlists(AUTH_TOKEN);
+
+        if (data.status === 200) {
+          dispatch({
+            type: SETWISHLISTS,
+            payload: { wishlists: data.wishlists },
+          });
+        }
+      } catch (error) {
+        // TODO: handle req fail when network off
+      }
+    }
+    fetchWishlists();
+  }, [AUTH_TOKEN]);
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>

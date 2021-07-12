@@ -1,25 +1,26 @@
-import { createContext, useReducer, useContext, useEffect } from "react";
+import { createContext, useReducer, useContext } from "react";
 import { authReducer } from "../reducers/authReducer";
 import { login } from "../api/login";
 import { useLocation, useNavigate } from "react-router";
+import { LOGIN, LOGOUT, SETTOKEN } from "../constants/auth";
 
 const AuthContext = createContext();
 
 export function AuthenticationProvider({ children }) {
   let logged = false;
-  let userId = null;
+  let AUTH_TOKEN = null;
 
   if (localStorage.getItem("logged") === "true") {
     logged = true;
   }
 
-  if (localStorage.getItem("userId")) {
-    userId = localStorage.getItem("userId");
+  if (localStorage.getItem("AUTH_TOKEN")) {
+    AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
   }
 
   const [authState, authDispatch] = useReducer(authReducer, {
     logged,
-    userId,
+    AUTH_TOKEN,
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,18 +28,20 @@ export function AuthenticationProvider({ children }) {
   const loginWithUsernamePassword = async (username, password) => {
     try {
       const res = await login({ username, password });
-
       if (res.data.status === 200) {
-        authDispatch({ type: "LOGIN", payload: { success: true } });
+        authDispatch({ type: LOGIN, payload: { success: true } });
         authDispatch({
-          type: "SETUSERID",
-          payload: { userId: res.data.userId },
+          type: SETTOKEN,
+          payload: { AUTH_TOKEN: res.data.token },
         });
         localStorage.setItem("logged", true);
-        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("AUTH_TOKEN", res.data.token);
         location.state !== null
           ? navigate(`/${location.state?.from}`)
           : navigate("/");
+      }
+      if (res.data.status === 401) {
+        return res.data.status;
       }
     } catch (error) {
       console.log(error);
@@ -47,6 +50,8 @@ export function AuthenticationProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem("login");
+    localStorage.removeItem("AUTH_TOKEN");
+    authDispatch({ type: LOGOUT });
     navigate("/");
   };
 

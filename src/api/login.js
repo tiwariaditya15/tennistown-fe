@@ -1,5 +1,8 @@
 import axios from "axios";
+import { URL as BaseURL } from "../api/baseURL";
 
-const URL = "http://localhost:5000/accounts/login";
+export const login = (credentials) =>
+  axios.post(`${BaseURL}/accounts/login`, credentials);
 
-export const login = (credentials) => axios.post(URL, credentials);
+export const signUp = (userData) =>
+  axios.post(`${BaseURL}/accounts/emailsignup`, { ...userData });

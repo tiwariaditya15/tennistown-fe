@@ -1,10 +1,10 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import * as api from "../../api/login";
 import "./style.css";
 import { useState } from "react";
 import { useAuthContext } from "../../context/AuthenticationProvider";
 
-export default function Signup({}) {
+export function Signup() {
   const [userData, setUserData] = useState({
     fullname: "",
     username: "",
@@ -12,32 +12,35 @@ export default function Signup({}) {
     password: "",
   });
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const { authDispatch } = useAuthContext();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const signUp = () => {
+  const signUp = async () => {
     if (
       userData.fullname.length &&
       userData.username.length &&
       userData.email.length &&
       userData.password.length
     ) {
-      axios
-        .post("http://localhost:5000/accounts/emailsignup", { ...userData })
-        .then((res) => {
-          if (res.data.status === 201) {
-            authDispatch({ type: "SIGNUP", payload: { success: true } });
-            navigate(`/`);
-            setError(false);
-          }
-        })
-        .catch((error) => console.log(error));
-      setError();
+      try {
+        const res = await api.signUp(userData);
+        console.log({ res });
+        if (res.data.status === 201) {
+          setError("");
+          // authDispatch({ type: "SIGNUP", payload: { success: true } });
+          // setError(false);
+          // navigate(`/`);
+        }
+      } catch (error) {
+        if (!error.status) {
+          setError("Either server or your internet is down.");
+        }
+      }
     } else {
-      setError(true);
+      setError("");
     }
   };
 
@@ -86,11 +89,11 @@ export default function Signup({}) {
         onClick={() => signUp()}
         className="btn btn-login"
       />
+      {error !== "" && <p className="error">{error}</p>}
       <section className="section-signin">
         Have an account?
         <NavLink to="/login">&nbsp;Log In</NavLink>
       </section>
-      {error}
     </section>
   );
 }

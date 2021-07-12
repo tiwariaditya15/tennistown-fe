@@ -1,8 +1,16 @@
 import axios from "axios";
+import { URL as BaseURL } from "../api/baseURL";
+const URL = `${BaseURL}/cart`;
 
-const URL = "http://localhost:5000/cart";
+export const getCart = (AUTH_TOKEN) =>
+  axios.get(`${URL}`, {
+    headers: {
+      Authorization: AUTH_TOKEN,
+    },
+  });
 
-export const getCart = (userId) => axios.get(`${URL}/${userId}`);
+export const addToCart = (productId, quantity) =>
+  axios.post(URL, { productId, quantity });
 
-export const updateProduct = (userId, productId, quantity) =>
-  axios.post(`${URL}/update/${userId}`, { productId, quantity });
+export const updateProduct = (productId, quantity) =>
+  axios.post(`${URL}/update`, { productId, quantity });

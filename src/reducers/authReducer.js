@@ -1,24 +1,26 @@
+import { LOGIN, SIGNUP, LOGOUT, SETTOKEN } from "../constants/auth";
 export const authReducer = (state, action) => {
   switch (action.type) {
-    case "LOGIN":
+    case LOGIN:
       return {
         logged: true,
       };
 
-    case "SIGNUP":
+    case SIGNUP:
       return {
         logged: true,
       };
 
-    case "LOGOUT":
+    case LOGOUT:
       return {
         logged: false,
+        userId: null,
       };
 
-    case "SETUSERID":
+    case SETTOKEN:
       return {
         ...state,
-        userId: action.payload.userId,
+        token: action.payload.token,
       };
 
     default:
