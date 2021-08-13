@@ -47,7 +47,7 @@ export function Cart() {
           .filter(({ quantity }) => quantity)
           .map(({ quantity, product: item }) => {
             return (
-              <section class="card">
+              <section className="card" key={item._id}>
                 <section className="card-header">
                   {state.wishlists.some(
                     (wish) => wish.product._id === item._id
@@ -59,13 +59,12 @@ export function Cart() {
                       <span
                         onClick={() => {
                           toggleWishlist(
-                            userId,
                             item._id,
                             dispatch,
                             interactionDispatcher
                           );
                         }}
-                        class="card-header-btn"
+                        className="card-header-btn"
                       >
                         <MdiCardsHeartRed />
                       </span>
@@ -78,25 +77,29 @@ export function Cart() {
                       <span
                         onClick={() => {
                           toggleWishlist(
-                            userId,
                             item._id,
                             dispatch,
                             interactionDispatcher
                           );
                         }}
-                        class="card-header-btn"
+                        className="card-header-btn"
                       >
                         <MdiHeartOutline />
                       </span>
                     </>
                   )}
-                  <img class="card-img" src={item.images[0]} alt="" srcset="" />
+                  <img
+                    className="card-img"
+                    src={item.images[0]}
+                    alt=""
+                    srcSet=""
+                  />
                 </section>
                 <section className="card-body">
-                  <section class="card-content">
-                    <p class="card-title">{item.name} </p>
-                    <p class="card-text">by {item.brand}</p>
-                    <span class="card-text rating">
+                  <section className="card-content">
+                    <p className="card-title">{item.name} </p>
+                    <p className="card-text">by {item.brand}</p>
+                    <span className="card-text rating">
                       <IcBaselineStar />
                       <IcBaselineStar />
                       <IcBaselineStar />
@@ -104,7 +107,7 @@ export function Cart() {
                       <IcBaselineStarBorder />
                     </span>
                     <span className="card-text">{item.ratings}</span>
-                    <p class="card-text flex">
+                    <p className="card-text flex">
                       <span
                         style={{
                           color: "#ef4444",
@@ -137,7 +140,7 @@ export function Cart() {
                     </p>
                   </section>
                   <section
-                    class="card-actions"
+                    className="card-actions"
                     style={{
                       display: "flex",
                       justifyContent: "space-around",
@@ -147,7 +150,6 @@ export function Cart() {
                       onClick={() => {
                         if (quantity > 0) {
                           updateProductQuantity(
-                            userId,
                             item._id,
                             dispatch,
                             interactionDispatcher,
@@ -169,7 +171,6 @@ export function Cart() {
                     <section
                       onClick={() => {
                         updateProductQuantity(
-                          userId,
                           item._id,
                           dispatch,
                           interactionDispatcher,

@@ -32,8 +32,8 @@ export function Home() {
         </NavLink>
       </section>
       <section className="brands">
-        {brands.map((brand) => (
-          <section>
+        {brands.map((brand, idx) => (
+          <section key={idx}>
             <img src={brand} alt="brands" className="brand" />
           </section>
         ))}

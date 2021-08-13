@@ -1,8 +1,8 @@
 import { createContext, useReducer, useContext } from "react";
 import { authReducer } from "../reducers/authReducer";
-import { login } from "../api/login";
+import { login, signUp } from "../api/login";
 import { useLocation, useNavigate } from "react-router";
-import { LOGIN, LOGOUT, SETTOKEN } from "../constants/auth";
+import { LOGIN, LOGOUT, SETTOKEN, SIGNUP } from "../constants/auth";
 
 const AuthContext = createContext();
 
@@ -40,11 +40,32 @@ export function AuthenticationProvider({ children }) {
           ? navigate(`/${location.state?.from}`)
           : navigate("/");
       }
-      if (res.data.status === 401) {
+
+      if (res.data.status === 401 || res.data.status === 404) {
         return res.data.status;
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const signUpWithUserData = async (userData) => {
+    try {
+      const res = await signUp(userData);
+      if (res.data.status === 201) {
+        authDispatch({ type: SIGNUP, payload: { success: true } });
+        authDispatch({
+          type: SETTOKEN,
+          payload: { AUTH_TOKEN: res.data.token },
+        });
+        localStorage.setItem("logged", true);
+        localStorage.setItem("AUTH_TOKEN", res.data.token);
+        navigate("/");
+        return;
+      }
+      return res;
+    } catch (error) {
+      console.log({ error });
     }
   };
 
@@ -57,7 +78,13 @@ export function AuthenticationProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ authState, authDispatch, loginWithUsernamePassword, logout }}
+      value={{
+        authState,
+        authDispatch,
+        signUpWithUserData,
+        loginWithUsernamePassword,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -9,7 +9,7 @@ export function WishLists() {
   return (
     <div className="flex">
       {state.wishlists.map(({ product }) => (
-        <Card item={product} />
+        <Card item={product} key={product._id} />
       ))}
       {state.wishlists.length === 0 && (
         <>

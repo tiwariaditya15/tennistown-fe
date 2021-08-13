@@ -5,16 +5,16 @@ export function Rating({ rating }) {
     i = 1,
     j = random + 1;
   while (i <= random) {
-    ratings.push(<IcBaselineStar />);
+    ratings.push(<IcBaselineStar key={i} />);
     i++;
   }
   while (j <= 5) {
-    ratings.push(<IcBaselineStarBorder />);
+    ratings.push(<IcBaselineStarBorder key={j} />);
     j++;
   }
   return (
     <>
-      <span class="card-text rating">{ratings}</span>
+      <span className="card-text rating">{ratings}</span>
     </>
   );
 }

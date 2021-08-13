@@ -2,7 +2,6 @@ import * as api from "../api/wishlists";
 import { SETWISHLISTS } from "../constants/wishslists";
 import { IDLE, UPDATING_WISHLISTS } from "../constants/interactions";
 export const toggleWishlist = async (
-  userId,
   productId,
   dispatch,
   interactionDispatcher
@@ -12,7 +11,7 @@ export const toggleWishlist = async (
       type: UPDATING_WISHLISTS,
       payload: { updatingProduct: productId },
     });
-    const { data } = await api.toggleWishlist(userId, productId);
+    const { data } = await api.toggleWishlist(productId);
     if (data.status === 200) {
       dispatch({ type: SETWISHLISTS, payload: { wishlists: data.wishlists } });
       interactionDispatcher({

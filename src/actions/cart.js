@@ -6,19 +6,17 @@ import {
   UPDATING_QUANTITY,
 } from "../constants/interactions";
 export const addToCart = async (
-  userId,
   productId,
   dispatch,
   interactionDispatcher,
   quantity = 1
 ) => {
-  const cartId = localStorage.getItem("cartId");
   try {
     interactionDispatcher({
       type: ADDING_TO_CART,
       payload: { addingProduct: productId },
     });
-    const { data } = await api.addToCart(userId, cartId, productId, quantity);
+    const { data } = await api.addToCart(productId, quantity);
     if (data.status === 200) {
       dispatch({
         type: ADDTOCART,
@@ -36,7 +34,6 @@ export const addToCart = async (
 };
 
 export const updateProductQuantity = async (
-  userId,
   productId,
   dispatch,
   interactionDispatcher,
@@ -47,14 +44,13 @@ export const updateProductQuantity = async (
       type: UPDATING_QUANTITY,
       payload: { updatingProduct: productId },
     });
-    const { data } = await api.updateProduct(userId, productId, quantity);
+    const { data } = await api.updateProduct(productId, quantity);
     if (data.status === 200) {
       return dispatch({
         type: UPDATEQUANTITY,
         payload: { productId: data.product, quantity: data.quantity },
       });
     }
-    // TODO: dispatch action saying couldn't find cart with userId
   } catch (error) {
     console.log({ error });
   } finally {

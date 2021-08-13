@@ -1,8 +1,7 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom";
-import * as api from "../../api/login";
-import "./style.css";
 import { useState } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthenticationProvider";
+import "./style.css";
 
 export function Signup() {
   const [userData, setUserData] = useState({
@@ -12,13 +11,14 @@ export function Signup() {
     password: "",
   });
 
-  const [error, setError] = useState("");
-  const { authDispatch } = useAuthContext();
+  const [error, setError] = useState(false);
+  const [serverError, setServerError] = useState({});
+  const { signUpWithUserData, authDispatch } = useAuthContext();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const signUp = async () => {
+  const signUpHandler = async () => {
     if (
       userData.fullname.length &&
       userData.username.length &&
@@ -26,25 +26,23 @@ export function Signup() {
       userData.password.length
     ) {
       try {
-        const res = await api.signUp(userData);
-        console.log({ res });
-        if (res.data.status === 201) {
-          setError("");
-          // authDispatch({ type: "SIGNUP", payload: { success: true } });
-          // setError(false);
-          // navigate(`/`);
+        const response = await signUpWithUserData(userData);
+
+        if (response.data.status === 400) {
+          setError(error);
+          setServerError();
         }
       } catch (error) {
+        console.log({ error });
         if (!error.status) {
           setError("Either server or your internet is down.");
         }
       }
     } else {
-      setError("");
+      setError(true);
     }
   };
 
-  console.log({ userData });
   return (
     <section className="section-login flex-column">
       <input
@@ -56,6 +54,7 @@ export function Signup() {
       {error && userData.fullname.length === 0 ? (
         <p className="error">Full Name can't be empty.</p>
       ) : null}
+
       <input
         type="text"
         onChange={(e) => setUserData({ ...userData, username: e.target.value })}
@@ -86,7 +85,7 @@ export function Signup() {
       <input
         type="button"
         value="Sign Up"
-        onClick={() => signUp()}
+        onClick={() => signUpHandler()}
         className="btn btn-login"
       />
       {error !== "" && <p className="error">{error}</p>}

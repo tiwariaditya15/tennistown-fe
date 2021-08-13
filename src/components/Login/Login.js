@@ -20,12 +20,16 @@ export function Login() {
         loginCredentials.password
       );
 
+      if (status === 404) {
+        setError("Wrong Username!");
+      }
+
       if (status === 401) {
-        setError("Wrong Username/password.");
+        setError("Wrong Password!");
       }
 
       if (status === undefined) {
-        setError("");
+        setError(status);
       }
     } else {
       if (!loginCredentials.username.length) {
@@ -43,7 +47,6 @@ export function Login() {
       }
     }
   };
-
   return (
     <>
       <section className="section-login flex-column">
@@ -70,7 +73,7 @@ export function Login() {
           className="form-input outlined"
         />
         <input
-          type="button"
+          type="submit"
           value="Log In"
           className="btn btn-login"
           onClick={login}

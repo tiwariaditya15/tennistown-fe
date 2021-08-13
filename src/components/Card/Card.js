@@ -22,7 +22,7 @@ export function Card({ item }) {
   const { pathname } = useLocation();
 
   return (
-    <section class="card" key={item._id}>
+    <section className="card" key={item._id}>
       <section className="card-header">
         {state.wishlists.some((wish) => wish.product._id === item._id) ? (
           status === UPDATING_WISHLISTS && updatingProduct === item._id ? (
@@ -30,14 +30,9 @@ export function Card({ item }) {
           ) : (
             <span
               onClick={() => {
-                toggleWishlist(
-                  userId,
-                  item._id,
-                  dispatch,
-                  interactionDispatcher
-                );
+                toggleWishlist(item._id, dispatch, interactionDispatcher);
               }}
-              class="card-header-btn"
+              className="card-header-btn"
             >
               <MdiCardsHeartRed />
             </span>
@@ -48,32 +43,22 @@ export function Card({ item }) {
           <>
             <span
               onClick={() => {
-                toggleWishlist(
-                  userId,
-                  item._id,
-                  dispatch,
-                  interactionDispatcher
-                );
+                toggleWishlist(item._id, dispatch, interactionDispatcher);
               }}
-              class="card-header-btn"
+              className="card-header-btn"
             >
               <MdiHeartOutline />
             </span>
           </>
         )}
-        <img
-          class="card-img"
-          src={item.images[0]}
-          alt=""
-          onMouseOver={() => console.log("hovered")}
-        />
+        <img className="card-img" src={item.images[0]} alt="" />
       </section>
       <section className="card-body">
-        <section class="card-content">
-          <p class="card-title">{item.name} </p>
-          <p class="card-text">by {item.brand}</p>
+        <section className="card-content">
+          <p className="card-title">{item.name} </p>
+          <p className="card-text">by {item.brand}</p>
           <Rating rating={item.ratings} />
-          <p class="card-text flex">
+          <p className="card-text flex">
             <span
               style={{
                 color: "#ef4444",
@@ -115,19 +100,13 @@ export function Card({ item }) {
                   return cur.product._id === item._id ? cur.quantity : quantity;
                 }, 0);
                 addToCart(
-                  userId,
                   item._id,
                   dispatch,
                   interactionDispatcher,
                   ++quantity
                 );
                 if (pathname === "/wishlists")
-                  toggleWishlist(
-                    userId,
-                    item._id,
-                    dispatch,
-                    interactionDispatcher
-                  );
+                  toggleWishlist(item._id, dispatch, interactionDispatcher);
               }}
             >
               Add to cart

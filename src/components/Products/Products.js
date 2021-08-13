@@ -30,7 +30,7 @@ export function Products() {
       <div className="products flex">
         {!data.length && <section className="loader"></section>}
         {filteredData.map((item) => (
-          <Card item={item} />
+          <Card item={item} key={item._id} />
         ))}
       </div>
     </>

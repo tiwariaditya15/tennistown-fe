@@ -20,7 +20,7 @@ export const authReducer = (state, action) => {
     case SETTOKEN:
       return {
         ...state,
-        token: action.payload.token,
+        AUTH_TOKEN: action.payload.AUTH_TOKEN,
       };
 
     default:
