@@ -1,7 +1,5 @@
 # TennisTown (Place to find your tennis needs)
 
----
-
 ## Features
 
 - Products Filtering
@@ -14,4 +12,4 @@
 - ReactJS
 - Context + useReducer(managing global state)
 - React Router
-  & [Scape CSS](https://scapecss.netlify.app/) for styling
+- [Scape CSS](https://scapecss.netlify.app/) for styling
