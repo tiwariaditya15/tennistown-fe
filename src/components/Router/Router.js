@@ -6,7 +6,7 @@ import { Login } from "../Login/";
 import { Signup } from "../Signup";
 import { Home } from "../Home/";
 import { Accounts } from "../Accounts/";
-import PrivateRoutes from "../PrivateRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 export function Router() {
   return (

@@ -10,12 +10,9 @@ export function AuthenticationProvider({ children }) {
   let logged = false;
   let AUTH_TOKEN = null;
 
-  if (localStorage.getItem("logged") === "true") {
-    logged = true;
-  }
-
   if (localStorage.getItem("AUTH_TOKEN")) {
     AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
+    logged = true;
   }
 
   const [authState, authDispatch] = useReducer(authReducer, {
@@ -34,15 +31,10 @@ export function AuthenticationProvider({ children }) {
           type: SETTOKEN,
           payload: { AUTH_TOKEN: res.data.token },
         });
-        localStorage.setItem("logged", true);
         localStorage.setItem("AUTH_TOKEN", res.data.token);
         location.state !== null
           ? navigate(`/${location.state?.from}`)
           : navigate("/");
-      }
-
-      if (res.data.status === 401 || res.data.status === 404) {
-        return res.data.status;
       }
     } catch (error) {
       console.log(error);
@@ -75,7 +67,6 @@ export function AuthenticationProvider({ children }) {
     authDispatch({ type: LOGOUT });
     navigate("/");
   };
-
   return (
     <AuthContext.Provider
       value={{

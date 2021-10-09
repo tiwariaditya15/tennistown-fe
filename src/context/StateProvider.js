@@ -30,7 +30,6 @@ export function StateProvider({ children }) {
   useEffect(() => {
     async function fetchCart() {
       try {
-        console.info(AUTH_TOKEN, "before fetchCart()");
         const res = await getCart();
 
         if (res.data.status === 200) {
@@ -48,11 +47,10 @@ export function StateProvider({ children }) {
     }
     fetchCart();
   }, [AUTH_TOKEN]);
-  console.log({ AUTH_TOKEN });
+
   useEffect(() => {
     async function fetchWishlists() {
       try {
-        console.info(AUTH_TOKEN, "before getWishlists()");
         const { data } = await getWishlists();
 
         if (data.status === 200) {

@@ -3,18 +3,21 @@ export const authReducer = (state, action) => {
   switch (action.type) {
     case LOGIN:
       return {
+        ...state,
         logged: true,
       };
 
     case SIGNUP:
       return {
+        ...state,
         logged: true,
       };
 
     case LOGOUT:
       return {
+        ...state,
+        AUTH_TOKEN: null,
         logged: false,
-        userId: null,
       };
 
     case SETTOKEN:

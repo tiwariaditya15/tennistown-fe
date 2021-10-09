@@ -1,10 +1,12 @@
 import { useEffect } from "react";
+import { LOGOUT } from "../constants/auth";
 import { useAuthContext } from "../context/AuthenticationProvider";
 
 const UNAUTHORIZED = 401;
 export function useInterceptors(axios) {
   const {
     authState: { AUTH_TOKEN },
+    authDispatch,
   } = useAuthContext();
   useEffect(() => {
     axios.interceptors.request.use(
@@ -22,8 +24,8 @@ export function useInterceptors(axios) {
       },
       function (error) {
         if (error.response.status === UNAUTHORIZED) {
-          localStorage.removeItem("logged");
           localStorage.removeItem("AUTH_TOKEN");
+          authDispatch({ type: LOGOUT });
         }
         return Promise.reject(error);
       }

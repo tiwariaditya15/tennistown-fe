@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthenticationProvider";
 import "./style.css";
 
@@ -10,7 +10,18 @@ export function Login() {
     password: "",
   });
 
+  const {
+    authState: { logged },
+  } = useAuthContext();
+
   const { loginWithUsernamePassword } = useAuthContext();
+
+  const setTestCredentials = () =>
+    setLoginCredentials({
+      ...loginCredentials,
+      username: "tiwariadi",
+      password: "tiwariadi",
+    });
 
   const login = async () => {
     if (loginCredentials.username.length && loginCredentials.password.length) {
@@ -47,11 +58,14 @@ export function Login() {
       }
     }
   };
+
+  if (logged) return <Navigate to="/" />;
   return (
     <>
       <section className="section-login flex-column">
         <input
           type="text"
+          value={loginCredentials.username}
           onChange={(e) => {
             setLoginCredentials({
               ...loginCredentials,
@@ -63,6 +77,7 @@ export function Login() {
         />
         <input
           type="password"
+          value={loginCredentials.password}
           onChange={(e) => {
             setLoginCredentials({
               ...loginCredentials,
@@ -77,6 +92,12 @@ export function Login() {
           value="Log In"
           className="btn btn-login"
           onClick={login}
+        />
+        <input
+          type="submit"
+          value="Fill Login Creds"
+          className="btn btn-login"
+          onClick={setTestCredentials}
         />
         {error !== "" && <p className="error"> {error} </p>}
       </section>

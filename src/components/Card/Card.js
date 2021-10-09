@@ -3,20 +3,18 @@ import { useAuthContext } from "../../context/AuthenticationProvider";
 import { useStateContext } from "../../context/StateProvider";
 import { useInteractions } from "../../context/InteractionProvider";
 import { Rating, Loader } from "../Atoms";
-import { MdiCardsHeartRed, MdiHeartOutline, BxBxRupee } from "../icones";
+import { BxBxRupee } from "../icones";
 import { addToCart } from "../../actions/cart";
 import { toggleWishlist } from "../../actions/wishslists";
-import {
-  ADDING_TO_CART,
-  UPDATING_WISHLISTS,
-} from "../../constants/interactions";
+import { ADDING_TO_CART } from "../../constants/interactions";
 import { useLocation } from "react-router";
+import Wishlist from "../Atoms/Wishlist";
 
 export function Card({ item }) {
   const [index, setIndex] = useState(0);
   const { state, dispatch } = useStateContext();
   const {
-    authState: { userId },
+    authState: { logged },
   } = useAuthContext();
   const { status, updatingProduct, interactionDispatcher } = useInteractions();
   const { pathname } = useLocation();
@@ -24,33 +22,7 @@ export function Card({ item }) {
   return (
     <section className="card" key={item._id}>
       <section className="card-header">
-        {state.wishlists.some((wish) => wish.product._id === item._id) ? (
-          status === UPDATING_WISHLISTS && updatingProduct === item._id ? (
-            <Loader classNames="card-header-btn" />
-          ) : (
-            <span
-              onClick={() => {
-                toggleWishlist(item._id, dispatch, interactionDispatcher);
-              }}
-              className="card-header-btn"
-            >
-              <MdiCardsHeartRed />
-            </span>
-          )
-        ) : status === UPDATING_WISHLISTS && updatingProduct === item._id ? (
-          <Loader classNames="card-header-btn" />
-        ) : (
-          <>
-            <span
-              onClick={() => {
-                toggleWishlist(item._id, dispatch, interactionDispatcher);
-              }}
-              className="card-header-btn"
-            >
-              <MdiHeartOutline />
-            </span>
-          </>
-        )}
+        {logged && <Wishlist item={item} />}
         <img className="card-img" src={item.images[0]} alt="" />
       </section>
       <section className="card-body">
