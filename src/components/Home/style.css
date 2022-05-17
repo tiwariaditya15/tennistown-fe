@@ -2,6 +2,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 .brand {
   max-width: 90%;
