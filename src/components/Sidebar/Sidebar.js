@@ -18,6 +18,7 @@ export function Sidebar({ isOpen, setIsOpen }) {
           display: "flex",
           justifyContent: "flex-end",
           width: "100%",
+          cursor: "pointer",
         }}
       >
         <span onClick={() => setIsOpen(false)}>

@@ -6,6 +6,7 @@ import {
   MdiCartOutline,
   MdiLogin,
   MdiMenu,
+  MdiAccount,
 } from "../icones";
 import { useStateContext } from "../../context/StateProvider";
 import { useAuthContext } from "../../context/AuthenticationProvider";
@@ -68,6 +69,11 @@ export function Navbar({ setIsOpen }) {
               <MdiLogin />
             </NavLink>
           )}
+          {logged ? (
+            <NavLink to="accounts" className="nav-link">
+              <MdiAccount />
+            </NavLink>
+          ) : null}
         </section>
       </section>
     </>

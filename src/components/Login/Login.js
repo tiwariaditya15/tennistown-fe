@@ -4,6 +4,7 @@ import { useAuthContext } from "../../context/AuthenticationProvider";
 import "./style.css";
 
 export function Login() {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [loginCredentials, setLoginCredentials] = useState({
     username: "",
@@ -26,6 +27,7 @@ export function Login() {
   const login = async () => {
     if (loginCredentials.username.length && loginCredentials.password.length) {
       setError("");
+      setLoading(true);
       const status = await loginWithUsernamePassword(
         loginCredentials.username,
         loginCredentials.password
@@ -42,6 +44,7 @@ export function Login() {
       if (status === undefined) {
         setError(status);
       }
+      setLoading(false);
     } else {
       if (!loginCredentials.username.length) {
         if (!loginCredentials.password.length) {
@@ -89,9 +92,9 @@ export function Login() {
         />
         <input
           type="submit"
-          value="Log In"
+          value={!loading ? "Log In" : "Loggin in..."}
           className="btn btn-login"
-          onClick={login}
+          onClick={() => (!loading ? login() : null)}
         />
         <input
           type="submit"

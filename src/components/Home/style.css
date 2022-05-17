@@ -8,7 +8,7 @@
   margin: 4rem auto 2rem auto;
 }
 .categories {
-  margin-top: 2rem;
+  margin-top: 6rem;
   margin-bottom: 0.2rem;
 }
 
@@ -43,6 +43,8 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   color: #aaa;
   background-color: var(--footer-color);
 }
@@ -56,6 +58,8 @@
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
   }
   .banner > img {
     all: unset;
