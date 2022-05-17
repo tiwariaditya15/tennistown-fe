@@ -1,7 +1,7 @@
 export function Accounts() {
   return (
     <section className="card card-accounts">
-      <section>yessirr</section>
+      <section>Coming Soon!</section>
     </section>
   );
 }
