@@ -12,7 +12,7 @@ import "./index.css";
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const { status } = useInteractions();
-  // useInterceptors(axios);
+  useInterceptors(axios);
   return (
     <div>
       <Navbar setIsOpen={setIsOpen} />

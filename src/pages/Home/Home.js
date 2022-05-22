@@ -12,19 +12,19 @@ export function Home() {
     <section>
       <ImageSlider images={images} />
       <section className="categories">
-        <NavLink to="products">
+        <NavLink to="products?category=racquet">
           <section className="category">
             <img src={racquet} alt="Racquet" />
             <span className="img-text">RACQUETS</span>
           </section>
         </NavLink>
-        <NavLink to="products">
+        <NavLink to="products?category=balls">
           <section className="category">
             <img src={balls} alt="Balls" />
             <span className="img-text">BALLS</span>
           </section>
         </NavLink>
-        <NavLink to="products">
+        <NavLink to="products?category=accessories">
           <section className="category">
             <img src={accessories} alt="Accessories" />
             <span className="img-text">ACCESSORIES</span>
