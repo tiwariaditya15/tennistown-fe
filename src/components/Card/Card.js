@@ -63,7 +63,11 @@ export function Card({ item }) {
           </p>
         </section>
         {status === ADDING_TO_CART && updatingProduct === item._id ? (
-          <Loader />
+          <section className="card-actions">
+            <section style={{ backgroundColor: "white", border: "none" }}>
+              <Loader />
+            </section>
+          </section>
         ) : (
           <section className="card-actions">
             <section
