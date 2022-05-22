@@ -1,5 +1,5 @@
 import { useStateContext } from "../../context/StateProvider";
-import { Card } from "../Card";
+import { Card } from "../../components/Card";
 import { NavLink } from "react-router-dom";
 import "./style.css";
 

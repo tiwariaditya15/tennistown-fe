@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useStateContext } from "../../context/StateProvider";
-import { Filters } from "../Filters/";
-import { Card } from "../Card";
+import { Filters } from "../../components/Filters";
+import { Card } from "../../components/Card";
 import { URL } from "../../api/baseURL";
 import { getSortedData, getFilteredData } from "./utilityFuntions";
 import "./style.css";

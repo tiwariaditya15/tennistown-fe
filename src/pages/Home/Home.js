@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { images, brands } from "../../images/index";
-import { ImageSlider } from "../Atoms";
+import { ImageSlider } from "../../components/Atoms";
 import balls from "../../images/balls.jpg";
 import racquet from "../../images/racquet.jpg";
 import accessories from "../../images/accessories.jpg";
-import { MdiTwitter, MdiGithub } from "../icones/index";
+import { MdiTwitter, MdiGithub } from "../../components/icones";
 import "./style.css";
 
 export function Home() {

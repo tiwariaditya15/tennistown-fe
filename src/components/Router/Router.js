@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { Cart } from "../Cart";
-import { WishLists } from "../WishLists/";
-import { Products } from "../Products/";
-import { Login } from "../Login/";
-import { Signup } from "../Signup";
-import { Home } from "../Home/";
-import { Accounts } from "../Accounts/";
+import { Cart } from "../../pages/Cart";
+import { WishLists } from "../../pages/WishLists";
+import { Products } from "../../pages/Products";
+import { Login } from "../../pages/Login";
+import { Signup } from "../../pages/Signup";
+import { Home } from "../../pages/Home";
+import { Accounts } from "../../pages/Accounts";
 import PrivateRoutes from "./PrivateRoutes";
 
 export function Router() {

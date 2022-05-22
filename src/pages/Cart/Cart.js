@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useStateContext } from "../../context/StateProvider";
 import { useInteractions } from "../../context/InteractionProvider";
 import { useAuthContext } from "../../context/AuthenticationProvider";
-import { Loader } from "../Atoms/Loader";
+import { Loader } from "../../components/Atoms/Loader";
 import { updateProductQuantity } from "../../actions/cart";
 import { toggleWishlist } from "../../actions/wishslists";
 import { UPDATING_WISHLISTS } from "../../constants/interactions";
@@ -14,7 +14,7 @@ import {
   IcBaselineStarBorder,
   IcBaselineAdd,
   IcBaselineRemove,
-} from "../icones/index";
+} from "../../components/icones";
 import "./style.css";
 
 export function Cart() {
