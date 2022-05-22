@@ -5,11 +5,13 @@ import { Filters } from "../../components/Filters";
 import { Card } from "../../components/Card";
 import { URL } from "../../api/baseURL";
 import { getSortedData, getFilteredData } from "./utilityFuntions";
+import { useSearchParams } from "react-router-dom";
 import "./style.css";
 
 export function Products() {
-  const { state } = useStateContext();
+  const { state, dispatch } = useStateContext();
   const [data, setData] = useState([]);
+  const [params] = useSearchParams();
 
   useEffect(() => {
     axios
@@ -21,6 +23,15 @@ export function Products() {
       })
       .catch((error) => console.log({ error }));
   }, []);
+
+  useEffect(() => {
+    if (data.length) {
+      dispatch({
+        type: "CHANGESELECTEDBRAND",
+        payload: { brand: params.get("brand") },
+      });
+    }
+  }, [data]);
 
   const sortedData = getSortedData(state.sortBy, data);
   const filteredData = getFilteredData(state.filters, sortedData);

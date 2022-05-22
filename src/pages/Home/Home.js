@@ -5,9 +5,11 @@ import balls from "../../images/balls.jpg";
 import racquet from "../../images/racquet.jpg";
 import accessories from "../../images/accessories.jpg";
 import { MdiTwitter, MdiGithub } from "../../components/icones";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export function Home() {
+  const navigate = useNavigate();
   return (
     <section>
       <ImageSlider images={images} />
@@ -33,8 +35,12 @@ export function Home() {
       </section>
       <section className="brands">
         {brands.map((brand, idx) => (
-          <section key={idx}>
-            <img src={brand} alt="brands" className="brand" />
+          <section
+            onClick={() => navigate(`/products?brand=${brand["name"]}`)}
+            style={{ cursor: "pointer", textAlign: "center" }}
+            key={idx}
+          >
+            <img src={brand["brand"]} alt="brands" className="brand" />
           </section>
         ))}
       </section>

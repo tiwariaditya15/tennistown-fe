@@ -16,7 +16,10 @@ export default function Filter({ setModal }) {
               key={idx}
               className={
                 "chip " +
-                (state.filters.selectedBrand === brand ? "chip-selected" : "")
+                (state.filters.selectedBrand.toLowerCase() ===
+                brand.toLowerCase()
+                  ? "chip-selected"
+                  : "")
               }
               onClick={() =>
                 dispatch({ type: "CHANGESELECTEDBRAND", payload: { brand } })
