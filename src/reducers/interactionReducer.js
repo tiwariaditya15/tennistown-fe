@@ -5,7 +5,6 @@ import {
   IDLE,
 } from "../constants/interactions";
 export const interactionReducer = (state, action) => {
-  console.log({ action });
   switch (action.type) {
     case ADDING_TO_CART:
       return {
