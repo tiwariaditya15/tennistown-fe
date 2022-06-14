@@ -5,6 +5,7 @@ import App from "./App";
 import { StateProvider } from "./context/StateProvider";
 import { AuthenticationProvider } from "./context/AuthenticationProvider";
 import { InteractionProvider } from "./context/InteractionProvider";
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>

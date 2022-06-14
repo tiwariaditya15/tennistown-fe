@@ -1,6 +1,27 @@
+.cart-products {
+  width: 90%;
+}
+
 .cart-details {
   margin: 1rem 1rem;
 }
 
+.checkout {
+  padding: 0.6rem 1rem;
+  background-color: #1f2937;
+  border: none;
+  color: white;
+  border-radius: 0.2rem;
+  height: max-content;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: 0.2rem;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 700px) {
+  .cart-products {
+    width: 100%;
+  }
 }

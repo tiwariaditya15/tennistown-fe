@@ -49,7 +49,7 @@ export const stateReducer = (state, action) => {
         ...state,
         filters: {
           ...state.filters,
-          selectedBrand: action.payload.brand,
+          selectedBrand: action.payload.brand ? action.payload.brand : "",
         },
       };
     case CHANGESELECTEDLEVEL:
@@ -57,7 +57,9 @@ export const stateReducer = (state, action) => {
         ...state,
         filters: {
           ...state.filters,
-          selectedLevel: action.payload.level,
+          selectedLevel: action.payload.level
+            ? action.payload.level
+            : action.payload.level,
         },
       };
 

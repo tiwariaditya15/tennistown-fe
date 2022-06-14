@@ -1,6 +1,7 @@
 import { IlArrowUp } from "../icones/index";
 import { useStateContext } from "../../context/StateProvider";
 import "./style.css";
+import { HIGHTOLOW, LOWTOHIGH } from "../../constants/cart";
 export default function Sort({ setModal }) {
   const { state, dispatch } = useStateContext();
   return (
@@ -10,7 +11,7 @@ export default function Sort({ setModal }) {
     >
       <section
         className="sort-items"
-        onChange={() => dispatch({ type: "LOWTOHIGH" })}
+        onChange={() => dispatch({ type: LOWTOHIGH })}
       >
         <span>
           <input
@@ -24,7 +25,7 @@ export default function Sort({ setModal }) {
       </section>
       <section
         className="sort-items"
-        onChange={() => dispatch({ type: "HIGHTOLOW" })}
+        onChange={() => dispatch({ type: HIGHTOLOW })}
       >
         <span>
           <input
@@ -39,6 +40,7 @@ export default function Sort({ setModal }) {
       <section
         className="sort-items"
         onChange={() => dispatch({ type: "BESTSELLER" })}
+        style={{ display: "none" }}
       >
         <span>
           <input
@@ -53,6 +55,7 @@ export default function Sort({ setModal }) {
       <section
         className="sort-items"
         onChange={() => dispatch({ type: "HIGHESTRATED" })}
+        style={{ display: "none" }}
       >
         <span>
           <input

@@ -1,3 +1,4 @@
+import { CHANGESELECTEDBRAND, CHANGESELECTEDLEVEL } from "../../constants/cart";
 import { useStateContext } from "../../context/StateProvider";
 import { IlArrowUp } from "../icones/index";
 
@@ -22,7 +23,7 @@ export default function Filter({ setModal }) {
                   : "")
               }
               onClick={() =>
-                dispatch({ type: "CHANGESELECTEDBRAND", payload: { brand } })
+                dispatch({ type: CHANGESELECTEDBRAND, payload: { brand } })
               }
             >
               {brand}
@@ -41,7 +42,7 @@ export default function Filter({ setModal }) {
                 (state.filters.selectedLevel === level ? "chip-selected" : "")
               }
               onClick={() =>
-                dispatch({ type: "CHANGESELECTEDLEVEL", payload: { level } })
+                dispatch({ type: CHANGESELECTEDLEVEL, payload: { level } })
               }
             >
               {level}

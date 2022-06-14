@@ -15,33 +15,82 @@ import {
   IcBaselineAdd,
   IcBaselineRemove,
 } from "../../components/icones";
+import { fetchRazorpayScript, options } from "./utilities";
 import "./style.css";
-
+import { RESETCART } from "../../constants/cart";
+import * as api from "../../api/cart";
 export function Cart() {
   const { state, dispatch } = useStateContext();
   const { status, updatingProduct, interactionDispatcher } = useInteractions();
   const {
     authState: { userId },
   } = useAuthContext();
-
+  const total = state.cart.reduce(
+    (acc, cur) => acc + cur.product.price.discounted * cur.quantity,
+    0
+  );
+  const handler = async (response) => {
+    try {
+      await api.resetCart();
+      dispatch({ type: RESETCART });
+    } catch (error) {}
+  };
+  const executePayment = async () => {
+    try {
+      await fetchRazorpayScript("https://checkout.razorpay.com/v1/checkout.js");
+      const razorpay = new window.Razorpay({
+        ...options,
+        amount: total * 100,
+        handler,
+      });
+      razorpay.on("payment.failed", function (response) {
+        console.log(response.error.code);
+        console.log(response.error.description);
+        console.log(response.error.source);
+        console.log(response.error.step);
+        console.log(response.error.reason);
+        console.log(response.error.metadata.order_id);
+        console.log(response.error.metadata.payment_id);
+      });
+      razorpay.open();
+    } catch (error) {
+      console.log({ error });
+    }
+  };
   return (
     <>
-      <section className="cart-details">
-        Subtotal(
-        {state.cart.reduce((acc, cartItem) => acc + cartItem.quantity, 0)}{" "}
-        items):
-        <span
+      <section className="card">
+        <section
           style={{
-            color: "#ef4444",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
           }}
         >
-          <BxBxRupee />
-          {state.cart.reduce(
-            (acc, cur) => acc + cur.product.price.discounted * cur.quantity,
-            0
-          )}
-        </span>
+          <section className="cart-details" style={{ width: "max-content" }}>
+            Subtotal(
+            {state.cart.reduce(
+              (acc, cartItem) => acc + cartItem.quantity,
+              0
+            )}{" "}
+            items):
+            <span
+              style={{
+                color: "#ef4444",
+              }}
+            >
+              <BxBxRupee />
+              {total}
+            </span>
+          </section>
+          {total !== 0 ? (
+            <button onClick={() => executePayment()} className="checkout">
+              Checkout
+            </button>
+          ) : null}
+        </section>
       </section>
+
       <div className="cart-products flex">
         {state.cart
           .filter(({ quantity }) => quantity)

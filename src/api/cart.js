@@ -9,3 +9,5 @@ export const addToCart = (productId, quantity) =>
 
 export const updateProduct = (productId, quantity) =>
   axios.post(`${URL}/update`, { productId, quantity });
+
+export const resetCart = () => axios.post(`${URL}/reset`);
