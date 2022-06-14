@@ -25,8 +25,8 @@ export function getFilteredData(filters, sortedData) {
     return [...sortedData];
   }
 
-  if (filters.selectedBrand.length) {
-    if (filters.selectedLevel.length) {
+  if (filters.selectedBrand?.length) {
+    if (filters.selectedLevel?.length) {
       return sortedData
         .filter((product) => product.brand === filters.selectedBrand)
         .filter(
@@ -40,8 +40,8 @@ export function getFilteredData(filters, sortedData) {
     );
   }
 
-  if (filters.selectedLevel.length) {
-    if (filters.selectedBrand.length) {
+  if (filters.selectedLevel?.length) {
+    if (filters.selectedBrand?.length) {
       return sortedData
         .filter(
           (product) =>

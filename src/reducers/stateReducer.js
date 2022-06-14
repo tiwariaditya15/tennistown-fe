@@ -7,8 +7,9 @@ import {
   CLEARFILTERS,
   CHANGESELECTEDBRAND,
   CHANGESELECTEDLEVEL,
+  RESETCART,
 } from "../constants/cart";
-import { SETWISHLISTS } from "../constants/wishslists";
+import { RESETWISHLISTS, SETWISHLISTS } from "../constants/wishslists";
 
 export const stateReducer = (state, action) => {
   switch (action.type) {
@@ -104,7 +105,16 @@ export const stateReducer = (state, action) => {
               };
         }),
       };
-
+    case RESETCART:
+      return {
+        ...state,
+        cart: [],
+      };
+    case RESETWISHLISTS:
+      return {
+        ...state,
+        wishlists: [],
+      };
     default:
       return state;
   }

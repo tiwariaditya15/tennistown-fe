@@ -1,8 +1,12 @@
 import { LOGOUT } from "../../constants/auth";
+import { RESETCART } from "../../constants/cart";
+import { RESETWISHLISTS } from "../../constants/wishslists";
 import { useAuthContext } from "../../context/AuthenticationProvider";
+import { useStateContext } from "../../context/StateProvider";
 
 export function Accounts() {
-  const { authDispatch } = useAuthContext();
+  const { logout } = useAuthContext();
+  const { dispatch } = useStateContext();
   return (
     <section style={{ width: "100%" }}>
       <section
@@ -26,7 +30,12 @@ export function Accounts() {
             borderRadius: "0.2rem",
             cursor: "pointer",
           }}
-          onClick={() => authDispatch({ type: LOGOUT })}
+          onClick={() => {
+            // authDispatch({ type: LOGOUT });
+            logout();
+            dispatch({ type: RESETCART });
+            dispatch({ type: RESETWISHLISTS });
+          }}
         >
           Log Out
         </button>
