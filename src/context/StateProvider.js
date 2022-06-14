@@ -22,7 +22,7 @@ export function StateProvider({ children }) {
   });
 
   const {
-    authState: { AUTH_TOKEN },
+    authState: { AUTH_TOKEN_TENNISTOWN },
   } = useAuthContext();
 
   useInterceptors(axios);
@@ -46,7 +46,7 @@ export function StateProvider({ children }) {
       }
     }
     fetchCart();
-  }, [AUTH_TOKEN]);
+  }, [AUTH_TOKEN_TENNISTOWN]);
 
   useEffect(() => {
     async function fetchWishlists() {
@@ -65,7 +65,7 @@ export function StateProvider({ children }) {
       }
     }
     fetchWishlists();
-  }, [AUTH_TOKEN]);
+  }, [AUTH_TOKEN_TENNISTOWN]);
 
   return (
     <StateContext.Provider value={{ state, dispatch }}>

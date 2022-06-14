@@ -8,16 +8,16 @@ const AuthContext = createContext();
 
 export function AuthenticationProvider({ children }) {
   let logged = false;
-  let AUTH_TOKEN = null;
+  let AUTH_TOKEN_TENNISTOWN = null;
 
-  if (localStorage.getItem("AUTH_TOKEN")) {
-    AUTH_TOKEN = localStorage.getItem("AUTH_TOKEN");
+  if (localStorage.getItem("AUTH_TOKEN_TENNISTOWN")) {
+    AUTH_TOKEN_TENNISTOWN = localStorage.getItem("AUTH_TOKEN_TENNISTOWN");
     logged = true;
   }
 
   const [authState, authDispatch] = useReducer(authReducer, {
     logged,
-    AUTH_TOKEN,
+    AUTH_TOKEN_TENNISTOWN,
   });
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,9 +29,9 @@ export function AuthenticationProvider({ children }) {
         authDispatch({ type: LOGIN, payload: { success: true } });
         authDispatch({
           type: SETTOKEN,
-          payload: { AUTH_TOKEN: res.data.token },
+          payload: { AUTH_TOKEN_TENNISTOWN: res.data.token },
         });
-        localStorage.setItem("AUTH_TOKEN", res.data.token);
+        localStorage.setItem("AUTH_TOKEN_TENNISTOWN", res.data.token);
         location.state !== null
           ? navigate(`/${location.state?.from}`)
           : navigate("/");
@@ -48,10 +48,10 @@ export function AuthenticationProvider({ children }) {
         authDispatch({ type: SIGNUP, payload: { success: true } });
         authDispatch({
           type: SETTOKEN,
-          payload: { AUTH_TOKEN: res.data.token },
+          payload: { AUTH_TOKEN_TENNISTOWN: res.data.token },
         });
         localStorage.setItem("logged", true);
-        localStorage.setItem("AUTH_TOKEN", res.data.token);
+        localStorage.setItem("AUTH_TOKEN_TENNISTOWN", res.data.token);
         navigate("/");
         return;
       }
@@ -63,7 +63,7 @@ export function AuthenticationProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem("login");
-    localStorage.removeItem("AUTH_TOKEN");
+    localStorage.removeItem("AUTH_TOKEN_TENNISTOWN");
     authDispatch({ type: LOGOUT });
     navigate("/");
   };

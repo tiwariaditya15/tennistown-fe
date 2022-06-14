@@ -14,17 +14,17 @@ export const authReducer = (state, action) => {
       };
 
     case LOGOUT:
-      localStorage.removeItem("AUTH_TOKEN");
+      localStorage.removeItem("AUTH_TOKEN_TENNISTOWN");
       return {
         ...state,
-        AUTH_TOKEN: null,
+        AUTH_TOKEN_TENNISTOWN: null,
         logged: false,
       };
 
     case SETTOKEN:
       return {
         ...state,
-        AUTH_TOKEN: action.payload.AUTH_TOKEN,
+        AUTH_TOKEN_TENNISTOWN: action.payload.AUTH_TOKEN_TENNISTOWN,
       };
 
     default:
